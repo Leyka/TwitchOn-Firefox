@@ -114,4 +114,4 @@ function setNewInterval() {
 
 // Start app
 checkIfLive()
-var interval = setNewInterval(refresh_time)
+var interval = setNewInterval()
