@@ -1,3 +1,9 @@
+/*
+  Author: Skander
+  Github: https://github.com/Leyka
+  Date: 2016-04-12
+*/
+
 // SDK
 var buttons = require('sdk/ui/button/action')
 var tabs = require('sdk/tabs')
