@@ -50,15 +50,15 @@ function checkIfLive() {
         let game = twitch.stream.game
         changeStatus()
 
-        // Change interval
-        if (refresh_time == default_refresh_time) {
-          refresh_time = 60*10 // Each 10 minutes
-          setNewInterval(refresh_time)
-        }
         // Notify
-        else if (!is_notified) {
+        if (!is_notified) {
           notify(game)
           is_notified = true
+        }
+        // Change interval
+        else if (refresh_time == default_refresh_time) {
+          refresh_time = 60*10 // Each 10 minutes
+          setNewInterval(refresh_time)
         }
       }
       else {
@@ -108,4 +108,4 @@ function setNewInterval(refresh_time_sec) {
 
 // Start app
 checkIfLive()
-setNewInterval(refresh_time)
+var interval = setNewInterval(refresh_time)
