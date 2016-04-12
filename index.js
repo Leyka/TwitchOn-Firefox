@@ -106,7 +106,7 @@ function changeStatus() {
   }
 }
 
-// Change refresh time in SECONDS
+// Change refresh time to check when Gardoum is live
 function setNewInterval() {
   clearInterval(interval)
   interval = setInterval(checkIfLive, refresh_time * 1000)
