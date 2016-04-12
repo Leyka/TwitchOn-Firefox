@@ -1,5 +1,5 @@
 {
-  "title": "Gardoum Live",
+  "title": "Gardoum",
   "name": "gardoum",
   "version": "1.0.0",
   "description": "Suivez Gardoum à tout moment!",
@@ -11,6 +11,6 @@
   },
   "license": "MIT",
   "keywords": [
-    "jetpack"
+    "gardoum", "twitch", "gardoum live", "lol", "league of legends", "live", "overwatch"
   ]
 }
