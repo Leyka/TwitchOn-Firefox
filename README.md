@@ -1,2 +1,2 @@
-# Gardoum-FirefoxModule
+# Gardoum Firefox Module
 Firefox module for a Gardoum (Twitch streamer) that notify when he's on stream
