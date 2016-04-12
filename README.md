@@ -1,6 +1,6 @@
 # Gardoum Firefox Extension
 
-Firefox extension for Twitch streamer that notify when he's on stream
+Firefox extension for Twitch streamer (Gardoum) that notify when he's on stream
 
 Set icon to "LIVE" (or "OFF") and notify when Gardoum is on air 
 
