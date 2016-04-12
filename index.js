@@ -64,7 +64,7 @@ function checkIfLive() {
         // Change interval
         else if (refresh_time == default_refresh_time) {
           refresh_time = 60*10 // Each 10 minutes
-          setNewInterval(refresh_time)
+          setNewInterval()
         }
       }
       else {
@@ -75,7 +75,7 @@ function checkIfLive() {
         // Change interval
         if (refresh_time != default_refresh_time) {
           refresh_time = default_refresh_time
-          setNewInterval(default_interval)
+          setNewInterval()
         }
       }
     }
@@ -107,9 +107,9 @@ function changeStatus() {
 }
 
 // Change refresh time in SECONDS
-function setNewInterval(refresh_time_sec) {
+function setNewInterval() {
   clearInterval(interval)
-  interval = setInterval(checkIfLive, refresh_time_sec * 1000)
+  interval = setInterval(checkIfLive, refresh_time * 1000)
 }
 
 // Start app
