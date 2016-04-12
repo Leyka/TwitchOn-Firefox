@@ -1,0 +1,16 @@
+{
+  "title": "Gardoum Live",
+  "name": "gardoum",
+  "version": "1.0.0",
+  "description": "Suivez Gardoum à tout moment!",
+  "main": "index.js",
+  "author": "Skander",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "MIT",
+  "keywords": [
+    "jetpack"
+  ]
+}
