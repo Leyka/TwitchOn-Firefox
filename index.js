@@ -1,19 +1,22 @@
 // SDK
 var buttons = require('sdk/ui/button/action')
 var tabs = require('sdk/tabs')
-var {setTimeout, clearInterval, setInterval} = require('sdk/timers')
+var {clearInterval, setInterval} = require('sdk/timers')
 var self = require('sdk/self')
 var notifications = require('sdk/notifications')
 var Request = require('sdk/request').Request
 
 // Gardoum
-const icon = self.data.url('gardoum.png')
+const default_refresh_time = 30 // default refresh time in seconds
 const stream_url = 'https://www.twitch.tv/gardoum'
-const json_url = 'https://api.twitch.tv/kraken/streams/domingo'
+const json_url = 'https://api.twitch.tv/kraken/streams/gardoum'
 const label_off = 'Gardoum est OFF'
 const label_live = 'Gardoum est en live!'
+const icon = self.data.url('gardoum.png')
+
 var is_live = false
 var is_notified = false
+var refresh_time = default_refresh_time
 
 // Create Add-on button
 var button = buttons.ActionButton({
@@ -45,20 +48,29 @@ function checkIfLive() {
       if (twitch.stream != null) {
         is_live = true
         let game = twitch.stream.game
+        changeStatus()
 
-        if(!is_notified) {
+        // Change interval
+        if (refresh_time == default_refresh_time) {
+          refresh_time = 60*10 // Each 10 minutes
+          setNewInterval(refresh_time)
+        }
+        // Notify
+        else if (!is_notified) {
           notify(game)
           is_notified = true
         }
-        
-        setNewInterval(60*10) // Check each 10 minutes
-        changeStatus()
       }
       else {
         is_live = false
         is_notified = false
-        setNewInterval(30) // Check each 30 seconds
         changeStatus()
+
+        // Change interval
+        if (refresh_time != default_refresh_time) {
+          refresh_time = default_refresh_time
+          setNewInterval(default_interval)
+        }
       }
     }
   }).get()
@@ -89,11 +101,11 @@ function changeStatus() {
 }
 
 // Change refresh time in SECONDS
-function setNewInterval(time_in_sec) {
+function setNewInterval(refresh_time_sec) {
   clearInterval(interval)
-  time_in_sec *= 1000
-  interval = setInterval(checkIfLive, time_ms)
+  interval = setInterval(checkIfLive, refresh_time_sec * 1000)
 }
 
+// Start app
 checkIfLive()
-setNewInterval(30) // Check each 30 seconds
+setNewInterval(refresh_time)
