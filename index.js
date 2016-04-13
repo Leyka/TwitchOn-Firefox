@@ -14,12 +14,12 @@ var Request = require('sdk/request').Request
 var _ = require("sdk/l10n").get  // localization
 
 // Config
-const streamer = 'Gardoum'
+const streamer = 'Voyboy'
 const default_refresh_time = 30 // default refresh time in seconds
 const stream_url = 'https://www.twitch.tv/' + streamer
 const json_url = 'https://api.twitch.tv/kraken/streams/' + streamer
-const label_off = streamer + ' est OFF'
-const label_live = streamer + ' est en live!'
+const label_off = streamer + ' - OFF'
+const label_live = _('is_streaming', streamer)
 const icon = self.data.url('gardoum.png')
 
 var is_live = false
@@ -34,7 +34,7 @@ var button = buttons.ActionButton({
     '32': './gardoum.png'
   },
   onClick: openStream,
-  badge: 'OFF',
+  badge: _('OFF'),
   badgeColor: '#3B3B43'
 })
 
@@ -88,13 +88,13 @@ function checkIfLive() {
 function notify(game) {
   notifications.notify({
     title: label_live,
-    text: 'joue à ' + game,
+    text: _('is_playing', streamer) + ' ' + game,
     iconURL: icon,
     onClick: openStream
   })
 }
 
-// Change status of icon if stream is on stream
+// Change status of icon when stream is on
 function changeStatus() {
   if (is_live) {
     button.label = label_live
@@ -103,7 +103,7 @@ function changeStatus() {
   }
   else {
     button.label = label_off
-    button.badge = 'OFF'
+    button.badge = _('OFF')
     button.badgeColor = '#3B3B43'
   }
 }
