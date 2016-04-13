@@ -34,7 +34,7 @@ var button = buttons.ActionButton({
     '32': './gardoum.png'
   },
   onClick: openStream,
-  badge: _('OFF'),
+  badge: 'OFF',
   badgeColor: '#3B3B43'
 })
 
@@ -103,7 +103,7 @@ function changeStatus() {
   }
   else {
     button.label = label_off
-    button.badge = _('OFF')
+    button.badge = 'OFF'
     button.badgeColor = '#3B3B43'
   }
 }
