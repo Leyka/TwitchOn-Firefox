@@ -15,7 +15,8 @@ let _ = require("sdk/l10n").get  // localization
 
 // Config
 const streamer = 'Gardoum'
-const default_refresh_time = 30 // default refresh time in seconds
+const idle_refresh_time = 30 // default refresh time, in seconds
+const active_refresh_time = 60*5 // Slow down refresh time when streamer is live (60s * 5 minutes)
 const stream_url = 'https://www.twitch.tv/' + streamer
 const json_url = 'https://api.twitch.tv/kraken/streams/' + streamer
 const label_off = streamer + ' - OFF'
@@ -24,7 +25,7 @@ const icon = self.data.url('gardoum.png')
 
 let is_live = false
 let is_notified = false
-let refresh_time = default_refresh_time
+let refresh_time = idle_refresh_time
 
 // Create Add-on button
 let button = buttons.ActionButton({
@@ -65,8 +66,8 @@ function checkIfLive() {
           is_notified = true
         }
         // Change interval
-        else if (refresh_time == default_refresh_time) {
-          refresh_time = 60*10 // Each 10 minutes
+        else if (refresh_time == idle_refresh_time) {
+          refresh_time = active_refresh_time
           setNewInterval()
         }
       }
@@ -76,8 +77,8 @@ function checkIfLive() {
         changeStatus()
 
         // Change interval
-        if (refresh_time != default_refresh_time) {
-          refresh_time = default_refresh_time
+        if (refresh_time != idle_refresh_time) {
+          refresh_time = idle_refresh_time
           setNewInterval()
         }
       }
