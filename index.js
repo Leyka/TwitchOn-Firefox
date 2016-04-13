@@ -5,16 +5,16 @@
 */
 
 // SDK
-var buttons = require('sdk/ui/button/action')
-var tabs = require('sdk/tabs')
-var {clearInterval, setInterval} = require('sdk/timers')
-var self = require('sdk/self')
-var notifications = require('sdk/notifications')
-var Request = require('sdk/request').Request
-var _ = require("sdk/l10n").get  // localization
+let buttons = require('sdk/ui/button/action')
+let tabs = require('sdk/tabs')
+let {clearInterval, setInterval} = require('sdk/timers')
+let self = require('sdk/self')
+let notifications = require('sdk/notifications')
+let Request = require('sdk/request').Request
+let _ = require("sdk/l10n").get  // localization
 
 // Config
-const streamer = 'Voyboy'
+const streamer = 'Gardoum'
 const default_refresh_time = 30 // default refresh time in seconds
 const stream_url = 'https://www.twitch.tv/' + streamer
 const json_url = 'https://api.twitch.tv/kraken/streams/' + streamer
@@ -22,12 +22,12 @@ const label_off = streamer + ' - OFF'
 const label_live = _('is_streaming', streamer)
 const icon = self.data.url('gardoum.png')
 
-var is_live = false
-var is_notified = false
-var refresh_time = default_refresh_time
+let is_live = false
+let is_notified = false
+let refresh_time = default_refresh_time
 
 // Create Add-on button
-var button = buttons.ActionButton({
+let button = buttons.ActionButton({
   id: 'btnOpenStream',
   label: label_off,
   icon: {
@@ -51,7 +51,8 @@ function checkIfLive() {
     overrideMimeType: 'text/plain; charset=latin1',
     onComplete: (response) => {
       let twitch = response.json;
-
+      // No connection
+      if (twitch == null) { return }
       // Is live
       if (twitch.stream != null) {
         is_live = true
