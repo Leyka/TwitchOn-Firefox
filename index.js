@@ -11,13 +11,15 @@ var {clearInterval, setInterval} = require('sdk/timers')
 var self = require('sdk/self')
 var notifications = require('sdk/notifications')
 var Request = require('sdk/request').Request
+var _ = require("sdk/l10n").get  // localization
 
-// Gardoum
+// Config
+const streamer = 'Gardoum'
 const default_refresh_time = 30 // default refresh time in seconds
-const stream_url = 'https://www.twitch.tv/gardoum'
-const json_url = 'https://api.twitch.tv/kraken/streams/gardoum'
-const label_off = 'Gardoum est OFF'
-const label_live = 'Gardoum est en live!'
+const stream_url = 'https://www.twitch.tv/' + streamer
+const json_url = 'https://api.twitch.tv/kraken/streams/' + streamer
+const label_off = streamer + ' est OFF'
+const label_live = streamer + ' est en live!'
 const icon = self.data.url('gardoum.png')
 
 var is_live = false
@@ -26,7 +28,7 @@ var refresh_time = default_refresh_time
 
 // Create Add-on button
 var button = buttons.ActionButton({
-  id: 'btnGardoum',
+  id: 'btnOpenStream',
   label: label_off,
   icon: {
     '32': './gardoum.png'
@@ -36,12 +38,12 @@ var button = buttons.ActionButton({
   badgeColor: '#3B3B43'
 })
 
-// Open a new tab with Gardoum stream
+// Open a new tab with the stream
 function openStream(state) {
   tabs.open(stream_url)
 }
 
-// Check if Gardoum is streaming
+// Check if streamer is streaming
 function checkIfLive() {
   // Get data from API Twitch
   let check_live = Request({
@@ -82,7 +84,7 @@ function checkIfLive() {
   }).get()
 }
 
-// Send a notification to user when Gardoum is live
+// Send a notification to user when streamer is live
 function notify(game) {
   notifications.notify({
     title: label_live,
@@ -92,7 +94,7 @@ function notify(game) {
   })
 }
 
-// Change status of icon if Gardoum on stream
+// Change status of icon if stream is on stream
 function changeStatus() {
   if (is_live) {
     button.label = label_live
