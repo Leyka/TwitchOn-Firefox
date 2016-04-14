@@ -6,7 +6,7 @@ Set icon to "LIVE" (or "OFF") + notify
 
 ![](data/on.png)
 
-## You need 
+## You'll need 
 * Firefox 
 * jpm 
 
