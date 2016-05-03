@@ -118,4 +118,4 @@ function setNewInterval() {
 
 // Start app
 checkIfLive()
-var interval = setNewInterval()
+let interval = setNewInterval()
