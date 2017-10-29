@@ -5,13 +5,13 @@
 */
 
 // SDK
-let buttons = require('sdk/ui/button/action')
-let tabs = require('sdk/tabs')
-let {clearInterval, setInterval} = require('sdk/timers')
-let self = require('sdk/self')
-let notifications = require('sdk/notifications')
-let Request = require('sdk/request').Request
-let _ = require("sdk/l10n").get  // localization
+const buttons = require('sdk/ui/button/action')
+const tabs = require('sdk/tabs')
+const {clearInterval, setInterval} = require('sdk/timers')
+const self = require('sdk/self')
+const notifications = require('sdk/notifications')
+const Request = require('sdk/request').Request
+const _ = require("sdk/l10n").get  // localization
 
 // Config
 const streamer = 'Gardoum'
